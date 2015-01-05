@@ -17,6 +17,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self registerForiCloudNotifications];
     return YES;
 }
 
@@ -76,8 +78,13 @@
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"BlocNotes.sqlite"];
     NSError *error = nil;
+    
+    // icloud support needs this option
+    NSDictionary *storeOptions = [self iCloudPersistentStoreOptions];
+    
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:storeOptions error:&error]) {
+//    if (![NSPersistentStoreCoordinator removeUbiquitousContentAndPersistentStoreAtURL:storeURL options:storeOptions error:&error]) {
         // Report any error we got.
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
@@ -104,7 +111,7 @@
     if (!coordinator) {
         return nil;
     }
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
 }
@@ -123,5 +130,94 @@
         }
     }
 }
+
+#pragma mark - Notification Observers
+- (void)registerForiCloudNotifications {
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    
+    [notificationCenter addObserver:self
+                           selector:@selector(storesWillChange:)
+                               name:NSPersistentStoreCoordinatorStoresWillChangeNotification
+                             object:self.persistentStoreCoordinator];
+    
+    [notificationCenter addObserver:self
+                           selector:@selector(storesDidChange:)
+                               name:NSPersistentStoreCoordinatorStoresDidChangeNotification
+                             object:self.persistentStoreCoordinator];
+    
+    [notificationCenter addObserver:self
+                           selector:@selector(persistentStoreDidImportUbiquitousContentChanges:)
+                               name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+                             object:self.persistentStoreCoordinator];
+}
+
+# pragma mark - iCloud Support
+
+/// Use these options in your call to -addPersistentStore:
+- (NSDictionary *)iCloudPersistentStoreOptions {
+    return @{NSPersistentStoreUbiquitousContentNameKey: @"BlocNotesAppCloudStore",
+//             NSPersistentStoreUbiquitousContentURLKey:[self cloudDirectory],
+            };
+}
+
+-(NSURL *)cloudDirectory
+{
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    NSString *teamID=@"iCloud";
+    NSString *bundleID=[[NSBundle mainBundle]bundleIdentifier];
+    NSString *cloudRoot=[NSString stringWithFormat:@"%@.%@",teamID,bundleID];
+    NSURL *cloudRootURL=[fileManager URLForUbiquityContainerIdentifier:cloudRoot];
+    NSLog (@"cloudRootURL=%@",cloudRootURL);
+    return cloudRootURL;
+}
+
+
+- (void) persistentStoreDidImportUbiquitousContentChanges:(NSNotification *)changeNotification {
+    NSLog(@"Stores imported ubiquitous content....");
+
+    NSManagedObjectContext *context = self.managedObjectContext;
+    
+    [context performBlock:^{
+        [context mergeChangesFromContextDidSaveNotification:changeNotification];
+    }];
+}
+
+- (void)storesWillChange:(NSNotification *)notification {
+    NSLog(@"Stores Will Change");
+    
+    [self.managedObjectContext performBlock:^{
+        if ([self.managedObjectContext hasChanges]) {
+            NSError *saveError;
+            if (![self.managedObjectContext save:&saveError]) {
+                NSLog(@"Save error: %@", saveError);
+            }
+        }
+    }];
+    
+    // drop any managed object references
+    [self.managedObjectContext reset];
+
+    // Disable your User Interface.
+}
+
+- (void)storesDidChange:(NSNotification *)notification {
+    // refetch data
+    // Enable your User Interface.
+    
+    NSLog(@"Stores Did Change");
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+
+    NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *info in fetchedObjects) {
+        NSLog(@"Note: %@", [info valueForKey:@"title"]);
+    }
+
+}
+
 
 @end
