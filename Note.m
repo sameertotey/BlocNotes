@@ -2,7 +2,7 @@
 //  Note.m
 //  BlocNotes
 //
-//  Created by Sameer Totey on 1/4/15.
+//  Created by Sameer Totey on 1/8/15.
 //  Copyright (c) 2015 Sameer Totey. All rights reserved.
 //
 
@@ -11,7 +11,9 @@
 
 @implementation Note
 
-@dynamic title;
 @dynamic detail;
+@dynamic title;
+@dynamic timeStamp;
+@dynamic complete;
 
 @end
