@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="j8Q-10-MG1">
             <objects>
-                <viewController id="TlM-43-7An" sceneMemberID="viewController">
+                <viewController id="TlM-43-7An" customClass="DetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vfQ-Lb-z8z"/>
                         <viewControllerLayoutGuide type="bottom" id="eZD-MH-Kcy"/>
@@ -15,9 +15,25 @@
                     <view key="view" contentMode="scaleToFill" id="0PR-7P-2b3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbc-04-C7R">
+                                <rect key="frame" x="279" y="289" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eZD-MH-Kcy" firstAttribute="top" secondItem="mbc-04-C7R" secondAttribute="bottom" constant="290" id="T7N-Fs-bBR"/>
+                            <constraint firstItem="mbc-04-C7R" firstAttribute="top" secondItem="vfQ-Lb-z8z" secondAttribute="bottom" constant="225" id="V2W-gB-Tds"/>
+                            <constraint firstItem="mbc-04-C7R" firstAttribute="centerX" secondItem="0PR-7P-2b3" secondAttribute="centerX" id="fW1-Ev-7xC"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rai-WU-tfi"/>
+                    <connections>
+                        <outlet property="detailDescriptionLabel" destination="mbc-04-C7R" id="SAZ-6k-2CX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kvt-mw-A4v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
