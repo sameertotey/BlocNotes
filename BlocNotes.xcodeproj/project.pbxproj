@@ -10,6 +10,8 @@
 		051FC7001A619D6C00F4D690 /* SplitViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051FC6FF1A619D6C00F4D690 /* SplitViewControllerDelegate.m */; };
 		051FC7031A623A7A00F4D690 /* ShowDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051FC7021A623A7A00F4D690 /* ShowDetailViewController.m */; };
 		051FC7061A623A9600F4D690 /* EditDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051FC7051A623A9600F4D690 /* EditDetailViewController.m */; };
+		051FC7081A642B7F00F4D690 /* TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 051FC7071A642B7F00F4D690 /* TableCell.xib */; };
+		051FC70E1A6467A800F4D690 /* NotesDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051FC70D1A6467A800F4D690 /* NotesDataTableViewController.m */; };
 		056C0C8C1A58ED54001D525B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 056C0C8B1A58ED54001D525B /* main.m */; };
 		056C0C8F1A58ED54001D525B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056C0C8E1A58ED54001D525B /* AppDelegate.m */; };
 		056C0C921A58ED54001D525B /* BlocNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 056C0C901A58ED54001D525B /* BlocNotes.xcdatamodeld */; };
@@ -68,6 +70,9 @@
 		051FC7021A623A7A00F4D690 /* ShowDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowDetailViewController.m; sourceTree = "<group>"; };
 		051FC7041A623A9600F4D690 /* EditDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDetailViewController.h; sourceTree = "<group>"; };
 		051FC7051A623A9600F4D690 /* EditDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDetailViewController.m; sourceTree = "<group>"; };
+		051FC7071A642B7F00F4D690 /* TableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TableCell.xib; path = ../TableCell.xib; sourceTree = "<group>"; };
+		051FC70C1A6467A800F4D690 /* NotesDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesDataTableViewController.h; sourceTree = "<group>"; };
+		051FC70D1A6467A800F4D690 /* NotesDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesDataTableViewController.m; sourceTree = "<group>"; };
 		056C0C861A58ED54001D525B /* BlocNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlocNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		056C0C8A1A58ED54001D525B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		056C0C8B1A58ED54001D525B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -155,6 +160,8 @@
 				059C85D51A5ED4F900F6D929 /* Animators */,
 				059C85BE1A5CEAD500F6D929 /* MasterViewController.h */,
 				059C85BF1A5CEAD500F6D929 /* MasterViewController.m */,
+				051FC70C1A6467A800F4D690 /* NotesDataTableViewController.h */,
+				051FC70D1A6467A800F4D690 /* NotesDataTableViewController.m */,
 				059C85C01A5CEAD500F6D929 /* DetailViewController.h */,
 				059C85C11A5CEAD500F6D929 /* DetailViewController.m */,
 				051FC7011A623A7A00F4D690 /* ShowDetailViewController.h */,
@@ -169,6 +176,7 @@
 				051FC6FE1A619D6C00F4D690 /* SplitViewControllerDelegate.h */,
 				051FC6FF1A619D6C00F4D690 /* SplitViewControllerDelegate.m */,
 				056C0C961A58ED54001D525B /* Main.storyboard */,
+				051FC7071A642B7F00F4D690 /* TableCell.xib */,
 				059C85C61A5EC64F00F6D929 /* TraitsOverrideViewController.h */,
 				059C85C71A5EC64F00F6D929 /* TraitsOverrideViewController.m */,
 				056C0C991A58ED54001D525B /* Images.xcassets */,
@@ -353,6 +361,7 @@
 			files = (
 				056C0C981A58ED54001D525B /* Main.storyboard in Resources */,
 				056C0C9D1A58ED54001D525B /* LaunchScreen.xib in Resources */,
+				051FC7081A642B7F00F4D690 /* TableCell.xib in Resources */,
 				056C0C9A1A58ED54001D525B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,6 +393,7 @@
 				056C0C921A58ED54001D525B /* BlocNotes.xcdatamodeld in Sources */,
 				059C85D21A5ED4E900F6D929 /* CoreDataTableViewController.m in Sources */,
 				059C85D31A5ED4E900F6D929 /* BaseTransitionAnimator.m in Sources */,
+				051FC70E1A6467A800F4D690 /* NotesDataTableViewController.m in Sources */,
 				051FC7031A623A7A00F4D690 /* ShowDetailViewController.m in Sources */,
 				059C85C21A5CEAD500F6D929 /* MasterViewController.m in Sources */,
 				056C0C8C1A58ED54001D525B /* main.m in Sources */,

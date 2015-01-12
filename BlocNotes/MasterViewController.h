@@ -7,15 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
-#import "CoreDataTableViewController.h"
-#import "NotesDataSource.h"
+#import "NotesDataTableViewController.h"
 
 @class DetailViewController;
 
-@interface MasterViewController :  CoreDataTableViewController<NSFetchedResultsControllerDelegate>
-
-@property (strong, nonatomic) DetailViewController *detailViewController;
+@interface MasterViewController :  NotesDataTableViewController<NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 

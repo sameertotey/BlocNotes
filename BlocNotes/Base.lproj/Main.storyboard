@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Note Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DXJ-sR-DR7">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Note Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DXJ-sR-DR7">
                                 <rect key="frame" x="36" y="84" width="528" height="30"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -26,7 +26,7 @@
                                     <outlet property="delegate" destination="TlM-43-7An" id="JWk-C9-dXh"/>
                                 </connections>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Detail Text of the Note" translatesAutoresizingMaskIntoConstraints="NO" id="EiL-Lz-31k">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Detail Text of the Note" translatesAutoresizingMaskIntoConstraints="NO" id="EiL-Lz-31k">
                                 <rect key="frame" x="36" y="124" width="528" height="128"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
@@ -41,12 +41,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="EiL-Lz-31k" firstAttribute="top" secondItem="DXJ-sR-DR7" secondAttribute="bottom" constant="10" id="04m-wo-IBj"/>
+                            <constraint firstItem="DXJ-sR-DR7" firstAttribute="top" secondItem="vfQ-Lb-z8z" secondAttribute="bottom" constant="20" id="4fk-Ux-LvO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EiL-Lz-31k" secondAttribute="trailing" constant="20" id="4tl-QW-Zwa"/>
+                            <constraint firstItem="DXJ-sR-DR7" firstAttribute="leading" secondItem="EiL-Lz-31k" secondAttribute="leading" id="H5i-nZ-o1G"/>
+                            <constraint firstItem="DXJ-sR-DR7" firstAttribute="trailing" secondItem="EiL-Lz-31k" secondAttribute="trailing" id="V2y-d5-j5M"/>
                             <constraint firstItem="EiL-Lz-31k" firstAttribute="leading" secondItem="0PR-7P-2b3" secondAttribute="leadingMargin" constant="20" id="VAU-QO-QQi"/>
-                            <constraint firstItem="DXJ-sR-DR7" firstAttribute="top" secondItem="vfQ-Lb-z8z" secondAttribute="bottom" constant="20" id="mgB-92-xTb"/>
-                            <constraint firstItem="DXJ-sR-DR7" firstAttribute="leading" secondItem="0PR-7P-2b3" secondAttribute="leadingMargin" constant="20" id="oSx-x7-td2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="DXJ-sR-DR7" secondAttribute="trailing" constant="20" id="pY1-nm-U8U"/>
+                            <constraint firstItem="EiL-Lz-31k" firstAttribute="top" secondItem="DXJ-sR-DR7" secondAttribute="bottom" constant="10" id="smF-fV-JiU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rai-WU-tfi">
@@ -112,6 +112,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="1pu-We-exK">
                             <connections>
                                 <action selector="editNote:" destination="tbN-fC-kbT" id="QyB-Bb-A8c"/>
+                                <segue destination="TlM-43-7An" kind="show" identifier="editDetail" id="ivT-Fk-LS0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -135,31 +136,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Note Cell" textLabel="MTI-hC-b4C" detailTextLabel="Rot-wz-Su1" style="IBUITableViewCellStyleSubtitle" id="pzD-Zm-qXx">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pzD-Zm-qXx" id="OLd-9f-FgK">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MTI-hC-b4C">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rot-wz-Su1">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="1A9-WK-cTu" kind="showDetail" identifier="showDetail" id="h8s-Oa-hoU"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="R5q-QP-KXe" id="p24-WU-ZtE"/>
                             <outlet property="delegate" destination="R5q-QP-KXe" id="ink-rN-kew"/>
@@ -167,7 +143,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="dxs-HS-CaM"/>
                     <connections>
-                        <segue destination="1A9-WK-cTu" kind="showDetail" identifier="editDetailAfterAdding" id="VIu-Iu-UeO"/>
+                        <segue destination="1A9-WK-cTu" kind="showDetail" identifier="showDetail" id="VIu-Iu-UeO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NiO-B8-fgC" userLabel="First Responder" sceneMemberID="firstResponder"/>
