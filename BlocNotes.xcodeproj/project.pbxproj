@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051FC7001A619D6C00F4D690 /* SplitViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051FC6FF1A619D6C00F4D690 /* SplitViewControllerDelegate.m */; };
+		051FC7031A623A7A00F4D690 /* ShowDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051FC7021A623A7A00F4D690 /* ShowDetailViewController.m */; };
+		051FC7061A623A9600F4D690 /* EditDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051FC7051A623A9600F4D690 /* EditDetailViewController.m */; };
 		056C0C8C1A58ED54001D525B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 056C0C8B1A58ED54001D525B /* main.m */; };
 		056C0C8F1A58ED54001D525B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056C0C8E1A58ED54001D525B /* AppDelegate.m */; };
 		056C0C921A58ED54001D525B /* BlocNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 056C0C901A58ED54001D525B /* BlocNotes.xcdatamodeld */; };
@@ -58,6 +61,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		051FC6FD1A619C3200F4D690 /* BlocNotesShareEx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BlocNotesShareEx.entitlements; sourceTree = "<group>"; };
+		051FC6FE1A619D6C00F4D690 /* SplitViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewControllerDelegate.h; sourceTree = "<group>"; };
+		051FC6FF1A619D6C00F4D690 /* SplitViewControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitViewControllerDelegate.m; sourceTree = "<group>"; };
+		051FC7011A623A7A00F4D690 /* ShowDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowDetailViewController.h; sourceTree = "<group>"; };
+		051FC7021A623A7A00F4D690 /* ShowDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowDetailViewController.m; sourceTree = "<group>"; };
+		051FC7041A623A9600F4D690 /* EditDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDetailViewController.h; sourceTree = "<group>"; };
+		051FC7051A623A9600F4D690 /* EditDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDetailViewController.m; sourceTree = "<group>"; };
 		056C0C861A58ED54001D525B /* BlocNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlocNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		056C0C8A1A58ED54001D525B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		056C0C8B1A58ED54001D525B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -147,11 +157,17 @@
 				059C85BF1A5CEAD500F6D929 /* MasterViewController.m */,
 				059C85C01A5CEAD500F6D929 /* DetailViewController.h */,
 				059C85C11A5CEAD500F6D929 /* DetailViewController.m */,
+				051FC7011A623A7A00F4D690 /* ShowDetailViewController.h */,
+				051FC7021A623A7A00F4D690 /* ShowDetailViewController.m */,
+				051FC7041A623A9600F4D690 /* EditDetailViewController.h */,
+				051FC7051A623A9600F4D690 /* EditDetailViewController.m */,
 				056C0CB21A58EE19001D525B /* BlocNotes.entitlements */,
 				059C85D61A5F04A700F6D929 /* NotesDataSource.h */,
 				059C85D71A5F04A700F6D929 /* NotesDataSource.m */,
 				056C0C8D1A58ED54001D525B /* AppDelegate.h */,
 				056C0C8E1A58ED54001D525B /* AppDelegate.m */,
+				051FC6FE1A619D6C00F4D690 /* SplitViewControllerDelegate.h */,
+				051FC6FF1A619D6C00F4D690 /* SplitViewControllerDelegate.m */,
 				056C0C961A58ED54001D525B /* Main.storyboard */,
 				059C85C61A5EC64F00F6D929 /* TraitsOverrideViewController.h */,
 				059C85C71A5EC64F00F6D929 /* TraitsOverrideViewController.m */,
@@ -203,6 +219,7 @@
 		059C85E11A60C69E00F6D929 /* BlocNotesShareEx */ = {
 			isa = PBXGroup;
 			children = (
+				051FC6FD1A619C3200F4D690 /* BlocNotesShareEx.entitlements */,
 				059C85E41A60C69E00F6D929 /* ShareViewController.h */,
 				059C85E51A60C69E00F6D929 /* ShareViewController.m */,
 				059C85E71A60C69E00F6D929 /* MainInterface.storyboard */,
@@ -301,6 +318,11 @@
 					059C85DF1A60C69E00F6D929 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 6QHDV6JE6P;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -357,12 +379,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				051FC7061A623A9600F4D690 /* EditDetailViewController.m in Sources */,
 				056C0C8F1A58ED54001D525B /* AppDelegate.m in Sources */,
 				056C0C921A58ED54001D525B /* BlocNotes.xcdatamodeld in Sources */,
 				059C85D21A5ED4E900F6D929 /* CoreDataTableViewController.m in Sources */,
 				059C85D31A5ED4E900F6D929 /* BaseTransitionAnimator.m in Sources */,
+				051FC7031A623A7A00F4D690 /* ShowDetailViewController.m in Sources */,
 				059C85C21A5CEAD500F6D929 /* MasterViewController.m in Sources */,
 				056C0C8C1A58ED54001D525B /* main.m in Sources */,
+				051FC7001A619D6C00F4D690 /* SplitViewControllerDelegate.m in Sources */,
 				059C85C31A5CEAD500F6D929 /* DetailViewController.m in Sources */,
 				059C85D81A5F04A700F6D929 /* NotesDataSource.m in Sources */,
 				059C85C81A5EC64F00F6D929 /* TraitsOverrideViewController.m in Sources */,
@@ -566,6 +591,7 @@
 		059C85ED1A60C69E00F6D929 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BlocNotesShareEx/BlocNotesShareEx.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -575,6 +601,7 @@
 				INFOPLIST_FILE = BlocNotesShareEx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -582,11 +609,13 @@
 		059C85EE1A60C69E00F6D929 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BlocNotesShareEx/BlocNotesShareEx.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BlocNotesShareEx/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -628,6 +657,7 @@
 				059C85EE1A60C69E00F6D929 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

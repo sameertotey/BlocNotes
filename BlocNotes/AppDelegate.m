@@ -11,8 +11,10 @@
 #import "DetailViewController.h"
 #import "TraitsOverrideViewController.h"
 #import "NotesDataSource.h"
+#import "SplitViewControllerDelegate.h"
 
-@interface AppDelegate () <UISplitViewControllerDelegate>
+@interface AppDelegate ()
+@property (nonatomic, strong) SplitViewControllerDelegate *splitViewControllerDelegate;
 
 @end
 
@@ -33,7 +35,8 @@
     
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
-    splitViewController.delegate = self;
+    self.splitViewControllerDelegate = [[SplitViewControllerDelegate alloc] init];
+    splitViewController.delegate = self.splitViewControllerDelegate;
     
     UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
     MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
@@ -41,6 +44,8 @@
     
     TraitsOverrideViewController *traitsOverrideViewController = (TraitsOverrideViewController *)self.window.rootViewController;
     traitsOverrideViewController.viewController = splitViewController;
+
+    splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
 
     return YES;
 

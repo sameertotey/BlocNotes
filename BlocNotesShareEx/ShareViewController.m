@@ -31,4 +31,13 @@
     return @[];
 }
 
+- (void)presentationAnimationDidFinish {
+    NSLog(@"Presentation animation did finish");
+}
+
+- (void)didSelectCancel {
+    NSLog(@"Did Select Cancel");
+}
+
+
 @end

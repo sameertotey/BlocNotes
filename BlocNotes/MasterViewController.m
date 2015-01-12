@@ -64,9 +64,9 @@
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
     Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
         
-    newNote.timeStamp = [NSDate date];
-    newNote.title = [NSString stringWithFormat:@"Title: %@", [newNote.timeStamp description]];
-    
+//    newNote.timeStamp = [NSDate date];
+//    newNote.title = [NSString stringWithFormat:@"Title: %@", [newNote.timeStamp description]];
+
     // Save the context.
     NSError *error = nil;
     if (![context save:&error]) {
@@ -75,18 +75,27 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    [self performSegueWithIdentifier:@"editDetailAfterAdding" sender:newNote];
 }
 
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Note *note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-        controller.note = note;
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        Note *note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        controller.note = note;
+        
+    } else if ([segue.identifier isEqualToString:@"editDetailAfterAdding"]) {
+        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
+        controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
+        controller.navigationItem.leftItemsSupplementBackButton = YES;
+        if ([sender isKindOfClass:[Note class]]) {
+            controller.note = sender;
+        }
     }
 }
 
@@ -115,8 +124,9 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [object valueForKey:@"title"];
+    Note *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = note.title;
+    cell.detailTextLabel.text = note.detail;
 }
 
 

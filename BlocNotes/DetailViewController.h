@@ -12,7 +12,6 @@
 @interface DetailViewController : UIViewController
 
 @property (strong, nonatomic) Note *note;
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 
 @end
 

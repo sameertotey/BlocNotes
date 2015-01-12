@@ -17,13 +17,16 @@
 @implementation TraitsOverrideViewController
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator
 {
-    if (size.width > 320.0) {
-        // If we are large enough, force a regular size class
-        self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassRegular];
-    } else {
-        // Otherwise, don't override any traits
-        self.forcedTraitCollection = nil;
-    }
+    // There is an issue with overriding traits of a view controller and core data, if I try to override the traits of the split view controller after performing updates on core data it crashes. So will disable traits overriding for now
+//    if (size.width > 320.0) {
+    // increased the width  to accomodate iPhone6 & iPhone6 plus
+//    if (size.width > 414.0) {
+//          // If we are large enough, force a regular size class
+//        self.forcedTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:UIUserInterfaceSizeClassRegular];
+//    } else {
+//        // Otherwise, don't override any traits
+//        self.forcedTraitCollection = nil;
+//    }
     
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }

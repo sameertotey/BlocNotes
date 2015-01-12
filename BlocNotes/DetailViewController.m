@@ -9,7 +9,6 @@
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
-
 @end
 
 @implementation DetailViewController
@@ -25,12 +24,6 @@
     }
 }
 
-- (void)configureView {
-    // Update the user interface for the detail item.
-    if (self.note) {
-        self.detailDescriptionLabel.text = self.note.title;
-    }
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,5 +35,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)configureView {
+}
+
 
 @end
