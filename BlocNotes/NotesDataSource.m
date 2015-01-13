@@ -47,27 +47,26 @@
 - (void)setupManagedObjectContext
 {
     [self registerForiCloudNotifications];
-    self.managedObjectContext = [self setupManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
+//    self.managedObjectContext = [self setupManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
     self.managedObjectContext.undoManager = [[NSUndoManager alloc] init];
 }
 
-- (NSManagedObjectContext *)setupManagedObjectContextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType
-{
-    NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:concurrencyType];
-    managedObjectContext.persistentStoreCoordinator =
-    [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
-    NSError* error;
-    [managedObjectContext.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
-                                                                  configuration:nil
-                                                                            URL:self.storeURL
-                                                                        options:nil
-                                                                          error:&error];
-    if (error) {
-        NSLog(@"error: %@", error.localizedDescription);
-        NSLog(@"rm \"%@\"", self.storeURL.path);
-    }
-    return managedObjectContext;
-}
+//- (NSManagedObjectContext *)setupManagedObjectContextWithConcurrencyType:(NSManagedObjectContextConcurrencyType)concurrencyType
+//{
+//    NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:concurrencyType];
+//    managedObjectContext.persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
+//    NSError* error;
+//    [managedObjectContext.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+//                                                                  configuration:nil
+//                                                                            URL:self.storeURL
+//                                                                        options:self.storeOptions
+//                                                                          error:&error];
+//    if (error) {
+//        NSLog(@"error: %@", error.localizedDescription);
+//        NSLog(@"rm \"%@\"", self.storeURL.path);
+//    }
+//    return managedObjectContext;
+//}
 
 - (NSManagedObjectModel *)managedObjectModel {
     // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
@@ -162,7 +161,7 @@
 # pragma mark - iCloud Support
 
 - (void) persistentStoreDidImportUbiquitousContentChanges:(NSNotification *)changeNotification {
-    NSLog(@"Stores imported ubiquitous content....");
+    NSLog(@"[%@ %@] Store Did Import Ubiquitous Content Changes", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     
     NSManagedObjectContext *context = self.managedObjectContext;
     
@@ -172,7 +171,7 @@
 }
 
 - (void)storesWillChange:(NSNotification *)notification {
-    NSLog(@"Stores Will Change");
+    NSLog(@"[%@ %@] Store Will Change", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     
     [self.managedObjectContext performBlock:^{
         if ([self.managedObjectContext hasChanges]) {
@@ -180,20 +179,25 @@
             if (![self.managedObjectContext save:&saveError]) {
                 NSLog(@"Save error: %@", saveError);
             }
+        } else {
+            // drop any managed object references
+            [self.managedObjectContext reset];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kResetTheContext object:nil];
+            // Disable your User Interface.
         }
     }];
     
-    // drop any managed object references
-    [self.managedObjectContext reset];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kResetTheContext object:nil];
+    NSPersistentStoreUbiquitousTransitionType transitionType = [notification.userInfo[NSPersistentStoreUbiquitousTransitionTypeKey] integerValue];
+    NSLog(@"[%@ %@] Transition Type :%u", NSStringFromClass([self class]), NSStringFromSelector(_cmd), transitionType);
     
-    // Disable your User Interface.
 }
 
 - (void)storesDidChange:(NSNotification *)notification {
     // refetch data
     // Enable your User Interface.
-    _managedObjectContext = nil;
+    NSLog(@"[%@ %@] Store Did Change", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+
+    self.managedObjectContext = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:kRefetchRequired object:nil];
 
 }

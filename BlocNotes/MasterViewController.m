@@ -53,7 +53,7 @@
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
     Note *newNote = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
+    newNote.timeStamp = [NSDate date];
     // Save the context.
     NSError *error = nil;
     if (![context save:&error]) {

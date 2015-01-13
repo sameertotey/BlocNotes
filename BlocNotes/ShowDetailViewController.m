@@ -64,7 +64,7 @@
     [super viewWillLayoutSubviews];
     
     // we will adjust the height of the detail text view to fit its text
-    CGSize maxSize = CGSizeMake(CGRectGetWidth(self.detailTextView.frame) - 20, CGFLOAT_MAX);
+    CGSize maxSize = CGSizeMake(CGRectGetWidth(self.detailTextView.bounds) - 20, CGFLOAT_MAX);
     
     CGSize detailTextViewSize = [self.detailTextView sizeThatFits:self.detailTextView.bounds.size];
     

@@ -68,6 +68,8 @@
     if (context) {
         self.note.title = self.titleTextField.text;
         self.note.detail = self.detailTextView.text;
+        self.note.timeStamp = [NSDate date];
+
         // Save the context.
         NSError *error = nil;
         if (![context save:&error]) {
