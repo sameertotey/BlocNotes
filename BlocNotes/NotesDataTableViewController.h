@@ -16,6 +16,10 @@ static NSString * const kCellIdentifier = @"NoteCell";
 
 @interface NotesDataTableViewController : CoreDataTableViewController
 
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+
+- (void)setupFetchedResultsControllerWithPredicate:(NSPredicate *)predicate;
 
 @end

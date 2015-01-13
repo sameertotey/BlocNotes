@@ -25,14 +25,66 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.tableView registerNib:[UINib nibWithNibName:@"TableCell" bundle:nil] forCellReuseIdentifier:@"NoteCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TableCell" bundle:nil] forCellReuseIdentifier:kCellIdentifier];
+    self.debug = YES;
+    [self registerForNotifications];
+    self.managedObjectContext = [[NotesDataSource sharedInstance] managedObjectContext];
+    [self setupFetchedResultsControllerWithPredicate:nil];
+}
 
+- (void)registerForNotifications {
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    
+    [notificationCenter addObserver:self
+                           selector:@selector(resetTheContext:)
+                               name:kResetTheContext
+                             object:nil];
+    
+    [notificationCenter addObserver:self
+                           selector:@selector(refetchRequied:)
+                               name:kRefetchRequired
+                             object:nil];
+    }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)resetTheContext:(NSNotification *)notification {
+    NSLog(@"[%@ %@] Reset the context received", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+}
+
+- (void)refetchRequied:(NSNotification *)notification {
+    NSLog(@"[%@ %@] Refetch", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    self.managedObjectContext = [[NotesDataSource sharedInstance] managedObjectContext];
+    [self setupFetchedResultsControllerWithPredicate:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (void)setupFetchedResultsControllerWithPredicate:(NSPredicate *)predicate {
+    
+    // Create and configure a fetch request with the Book entity.
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Create the sort descriptors array.
+    NSSortDescriptor *titleDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    NSArray *sortDescriptors = @[titleDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // set the predicate
+    [fetchRequest setPredicate:predicate];
+    
+    // Create and initialize the fetch results controller.
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+}
+
 
 #pragma mark - Table View
 

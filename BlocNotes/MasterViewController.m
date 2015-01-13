@@ -46,29 +46,8 @@
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
-    self.debug = YES;
     
-    [self setupFetchedResultsController];
 }
-
-- (void)setupFetchedResultsController {
-    
-    // Create and configure a fetch request with the Book entity.
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Create the sort descriptors array.
-    NSSortDescriptor *titleDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
-    NSArray *sortDescriptors = @[titleDescriptor];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Create the predicate
-    
-    // Create and initialize the fetch results controller.
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-}
-
 
 - (void)insertNewObject:(id)sender {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
@@ -102,7 +81,7 @@
 // here we are the table view delegate for both our main table and filtered table, so we can
 // push from the current navigation controller (resultsTableController's parent view controller
 // is not this UINavigationController)
-//
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Note *selectedNote = (tableView == self.tableView) ?
     [self.fetchedResultsController objectAtIndexPath:indexPath] : [self.resultsTableController.fetchedResultsController objectAtIndexPath:indexPath];
@@ -179,25 +158,7 @@
     // create the final predicate for the fetch results controller for the notes searched table view
     finalCompoundPredicate = (NSCompoundPredicate *)[NSCompoundPredicate andPredicateWithSubpredicates:andMatchPredicates];
     
-    // Create and configure a fetch request with the Note entity.
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Create the sort descriptors array.
-    NSSortDescriptor *titleDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
-    NSArray *sortDescriptors = @[titleDescriptor];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Create the predicate
-    [fetchRequest setPredicate:finalCompoundPredicate];
-
-
-    // hand over the filtered results to our search results table
-    NotesDataTableViewController *tableController = (NotesDataTableViewController *)self.searchController.searchResultsController;
-    // Create and initialize the fetch results controller.
-    tableController.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-    [tableController.tableView reloadData];
+    [self.resultsTableController setupFetchedResultsControllerWithPredicate:finalCompoundPredicate];
 }
 
 #pragma mark - UISearchControllerDelegate

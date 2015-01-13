@@ -185,6 +185,7 @@
     
     // drop any managed object references
     [self.managedObjectContext reset];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kResetTheContext object:nil];
     
     // Disable your User Interface.
 }
@@ -192,15 +193,9 @@
 - (void)storesDidChange:(NSNotification *)notification {
     // refetch data
     // Enable your User Interface.
-    
-    NSLog(@"Stores Did Change ===========");
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
-    NSError *error;
-    NSArray *fetchedNotes = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    for (NSManagedObject *note in fetchedNotes) {
-        NSLog(@" The note for %@", [note valueForKey:@"title"]);
-    }
-    
+    _managedObjectContext = nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRefetchRequired object:nil];
+
 }
 
 @end

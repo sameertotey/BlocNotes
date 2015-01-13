@@ -15,7 +15,7 @@
 
 @interface AppDelegate ()
 @property (nonatomic, strong) SplitViewControllerDelegate *splitViewControllerDelegate;
-
+@property (nonatomic, strong) NotesDataSource *notesDataSource;
 @end
 
 @implementation AppDelegate
@@ -24,12 +24,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // Create the singleton notes data source object and configure it
-    NotesDataSource *notesDataSource = [NotesDataSource sharedInstance];
+    self.notesDataSource = [NotesDataSource sharedInstance];
     NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     NSURL *storeURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"BlocNotes.sqlite"];
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"BlocNotes" withExtension:@"momd"];
     NSDictionary *storeOptions = [self iCloudPersistentStoreOptions];
-    [notesDataSource setupWithStoreURL:storeURL modelURL:modelURL storeOptions:storeOptions];
+    [self.notesDataSource setupWithStoreURL:storeURL modelURL:modelURL storeOptions:storeOptions];
 
      UISplitViewController *splitViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"Main Split View Controller"];
     
@@ -37,11 +37,7 @@
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     self.splitViewControllerDelegate = [[SplitViewControllerDelegate alloc] init];
     splitViewController.delegate = self.splitViewControllerDelegate;
-    
-    UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-    MasterViewController *controller = (MasterViewController *)masterNavigationController.topViewController;
-    controller.managedObjectContext = notesDataSource.managedObjectContext;
-    
+   
     TraitsOverrideViewController *traitsOverrideViewController = (TraitsOverrideViewController *)self.window.rootViewController;
     traitsOverrideViewController.viewController = splitViewController;
 

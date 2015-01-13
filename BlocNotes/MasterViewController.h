@@ -13,7 +13,6 @@
 
 @interface MasterViewController :  NotesDataTableViewController<NSFetchedResultsControllerDelegate>
 
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
 

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+static NSString * const kResetTheContext = @"ManagedObjectContextReset";
+static NSString * const kRefetchRequired = @"ManagedObjectContextRefetchRequied";
+
 @interface NotesDataSource : NSObject
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
