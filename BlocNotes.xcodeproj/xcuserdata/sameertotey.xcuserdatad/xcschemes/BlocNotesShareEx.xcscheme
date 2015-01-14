@@ -35,6 +35,20 @@
                ReferencedContainer = "container:BlocNotes.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "051FC75D1A661FB000F4D690"
+               BuildableName = "BlocNotesKitTests.xctest"
+               BlueprintName = "BlocNotesKitTests"
+               ReferencedContainer = "container:BlocNotes.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -43,13 +57,23 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "051FC75D1A661FB000F4D690"
+               BuildableName = "BlocNotesKitTests.xctest"
+               BlueprintName = "BlocNotesKitTests"
+               ReferencedContainer = "container:BlocNotes.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "059C85DF1A60C69E00F6D929"
-            BuildableName = "BlocNotesShareEx.appex"
-            BlueprintName = "BlocNotesShareEx"
+            BlueprintIdentifier = "056C0C851A58ED54001D525B"
+            BuildableName = "BlocNotes.app"
+            BlueprintName = "BlocNotes"
             ReferencedContainer = "container:BlocNotes.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,7 +88,11 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <IDERemoteRunnable
+         RemotePath = "/Applications/MobileSafari.app"
+         BundleIdentifier = "/Applications/MobileSafari.app">
+      </IDERemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "056C0C851A58ED54001D525B"
@@ -72,7 +100,7 @@
             BlueprintName = "BlocNotes"
             ReferencedContainer = "container:BlocNotes.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

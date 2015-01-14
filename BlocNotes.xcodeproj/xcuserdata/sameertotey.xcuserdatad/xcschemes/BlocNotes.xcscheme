@@ -34,6 +34,20 @@
                ReferencedContainer = "container:BlocNotes.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "051FC75D1A661FB000F4D690"
+               BuildableName = "BlocNotesKitTests.xctest"
+               BlueprintName = "BlocNotesKitTests"
+               ReferencedContainer = "container:BlocNotes.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -49,6 +63,16 @@
                BlueprintIdentifier = "056C0CA11A58ED54001D525B"
                BuildableName = "BlocNotesTests.xctest"
                BlueprintName = "BlocNotesTests"
+               ReferencedContainer = "container:BlocNotes.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "051FC75D1A661FB000F4D690"
+               BuildableName = "BlocNotesKitTests.xctest"
+               BlueprintName = "BlocNotesKitTests"
                ReferencedContainer = "container:BlocNotes.xcodeproj">
             </BuildableReference>
          </TestableReference>

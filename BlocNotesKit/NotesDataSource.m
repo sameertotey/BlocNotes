@@ -188,7 +188,7 @@
     }];
     
     NSPersistentStoreUbiquitousTransitionType transitionType = [notification.userInfo[NSPersistentStoreUbiquitousTransitionTypeKey] integerValue];
-    NSLog(@"[%@ %@] Transition Type :%u", NSStringFromClass([self class]), NSStringFromSelector(_cmd), transitionType);
+    NSLog(@"[%@ %@] Transition Type :%lu", NSStringFromClass([self class]), NSStringFromSelector(_cmd), transitionType);
     
 }
 

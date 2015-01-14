@@ -10,8 +10,8 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import "TraitsOverrideViewController.h"
-#import "NotesDataSource.h"
 #import "SplitViewControllerDelegate.h"
+@import BlocNotesKit;
 
 @interface AppDelegate ()
 @property (nonatomic, strong) SplitViewControllerDelegate *splitViewControllerDelegate;

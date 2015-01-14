@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>BlocNotesKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>BlocNotesShareEx.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +22,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>051FC7531A661FB000F4D690</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>051FC75D1A661FB000F4D690</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>056C0C851A58ED54001D525B</key>
 		<dict>
 			<key>primary</key>

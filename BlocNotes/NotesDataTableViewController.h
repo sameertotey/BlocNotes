@@ -9,8 +9,7 @@
 #import "CoreDataTableViewController.h"
 #import <CoreData/CoreData.h>
 #import "CoreDataTableViewController.h"
-#import "NotesDataSource.h"
-#import "Note.h"
+@import BlocNotesKit;
 
 static NSString * const kCellIdentifier = @"NoteCell";
 

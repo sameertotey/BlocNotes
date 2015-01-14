@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Note.h"
+@import BlocNotesKit;
 
 @interface DetailViewController : UIViewController
 
